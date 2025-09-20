@@ -172,5 +172,12 @@ namespace DVLD
             _UpdatePeople(clsPeople.GetAllPeople());
             
         }
+
+        private void addToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form frmAddPerson = new frmAddEditPerson(-1);
+            frmAddPerson.ShowDialog();
+            _UpdatePeople(clsPeople.GetAllPeople());
+        }
     }
 }

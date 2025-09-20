@@ -1,12 +1,5 @@
 ﻿using DVLD___Logic_Layer;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DVLD
@@ -26,7 +19,8 @@ namespace DVLD
 
             _Person = clsPeople.FindWithPersonID(PersonID);
 
-            lblName.Text = _Person.FirstName;
+            lblPersonID.Text = PersonID.ToString();
+            lblName.Text = _Person.FirstName + " " + _Person.SecondName + " " + _Person.ThirdName + " " + _Person.LastName;
             lblNationalNo.Text = _Person.NationalNo;
             
             if (_Person.Gender == 0)
@@ -47,7 +41,7 @@ namespace DVLD
                 pbImage.ImageLocation = _Person.ImagePath;
             }
         }
-
+        
         private void ShowPersonInfo_Load(object sender, EventArgs e)
         {
             _LoadData();

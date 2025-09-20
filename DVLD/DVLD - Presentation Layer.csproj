@@ -46,12 +46,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddEdit Person Info.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="AddEdit Person Info.Designer.cs">
-      <DependentUpon>AddEdit Person Info.cs</DependentUpon>
-    </Compile>
     <Compile Include="frmAddEditPerson.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -84,9 +78,6 @@
     <Compile Include="ShowPersonInfo.Designer.cs">
       <DependentUpon>ShowPersonInfo.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="AddEdit Person Info.resx">
-      <DependentUpon>AddEdit Person Info.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="frmAddEditPerson.resx">
       <DependentUpon>frmAddEditPerson.cs</DependentUpon>
     </EmbeddedResource>

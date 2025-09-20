@@ -14,53 +14,14 @@ namespace DVLD
     public partial class frmShowPersonInfo : Form
     {
 
-        private int _PersonID;
-        private clsPeople _Person;
-
         public frmShowPersonInfo(int PersonID)
         {
             InitializeComponent();
 
-            _PersonID = PersonID;
-
-            _LoadData();
-
+            ShowPersonInfo.PersonID = PersonID;
         }
 
-        private void _LoadData()
-        {
-
-            _Person = clsPeople.FindWithPersonID(_PersonID);
-
-            lblPersonID.Text = _PersonID.ToString();
-            lblName.Text = _Person.FirstName + " " +_Person.SecondName + " " + _Person.ThirdName + " " + _Person.LastName;
-            lblNationalNo.Text = _Person.NationalNo;
-
-            if (_Person.Gender == 0)
-            {
-                lblGendor.Text = "Male";
-            }
-            else if (_Person.Gender == 1)
-            {
-                lblGendor.Text = "Female";
-            }
-            lblDateOfBirth.Text = _Person.DateOfBirth.ToShortDateString();
-            lblPhone.Text = _Person.Phone;
-            lblEmail.Text = _Person.Email;
-            lblAddress.Text = _Person.Address;
-            lblCountry.Text = clsCountry.Find(_Person.CountryID).CountryName;
-            if (_Person.ImagePath != null)
-            {
-                pbImage.ImageLocation = _Person.ImagePath;
-            }
-        }
-
-        private void lblEdit_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            Form Edit = new frmAddEditPerson(_PersonID);
-            Edit.ShowDialog();
-        }
-    
+        
         private void frmShowPersonInfo_Load(object sender, EventArgs e)
         {
 
