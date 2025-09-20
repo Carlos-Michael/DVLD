@@ -179,5 +179,26 @@ namespace DVLD
             frmAddPerson.ShowDialog();
             _UpdatePeople(clsPeople.GetAllPeople());
         }
+
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Are You Sure Do You Want To Delete This Person ?", "Delete Person", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
+            {
+                if (clsPeople.DeletePerson((int)dgvPeople.CurrentRow.Cells[0].Value))
+                {
+                    MessageBox.Show("Person Deleted Successfully", "Person Deleted ", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+                else
+                {
+                    MessageBox.Show("Person Delete Faild", "Person Delete Faild ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                _UpdatePeople(clsPeople.GetAllPeople());
+            }
+        }
+
+        private void cToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

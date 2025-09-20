@@ -130,7 +130,7 @@ namespace DVLD
             if (_Person.Save())
             {
                 MessageBox.Show("Person Saved successfully", "Person Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                if (_Mode == _enMode.AddNew)
+                if (openFileDialog1.FileName != "")
                 {
                     File.Copy(openFileDialog1.FileName, ImageName);
                 }

@@ -309,6 +309,31 @@ Where PersonID = @PersonID";
             }
             return IsFound;
         }
+        
+        static public bool DeletePerson(int PersonID)
+        {
+            int RowsAffected = 0;
+            SqlConnection connection = new SqlConnection(clsDatabaseSettings.connectionstring);
+
+            string query = @"Delete from People WHERE PersonID = @PersonID";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@PersonID", PersonID);
+
+            try
+            {
+                connection.Open();
+                RowsAffected = command.ExecuteNonQuery();
+            }
+            catch { }
+            finally
+            {
+                connection.Close();
+            }
+
+            return (RowsAffected > 0);
+        }
 
     }
 }

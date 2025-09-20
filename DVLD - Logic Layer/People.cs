@@ -192,6 +192,10 @@ namespace DVLD___Logic_Layer
             return clsPeopleDataAccess.IsExist(NationalNo);
         }
 
+        public static bool DeletePerson(int PersonID)
+        {
+            return clsPeopleDataAccess.DeletePerson(PersonID);
+        }
 
         static void Main(string[] args)
         {
