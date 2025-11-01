@@ -11,10 +11,28 @@ namespace DVLD
             InitializeComponent();
         }
 
+        private void _RememberMe()
+        {
+            if (chkRemember.Checked == true)
+            {
+                Properties.Settings.Default.Username = tbUsername.Text;
+                Properties.Settings.Default.Password = tbPassword.Text;
+
+            }
+            else
+            {
+                Properties.Settings.Default.Username = null;
+                Properties.Settings.Default.Password = null;
+            }
+            Properties.Settings.Default.Save();
+
+        }
+
         private void btnLogin_Click(object sender, EventArgs e)
         {
             if (clsUser.Login(tbUsername.Text, tbPassword.Text))
             {
+                _RememberMe();
                 Form frmHomeScreen = new Form1();
                 this.Hide();
                 frmHomeScreen.ShowDialog();
@@ -25,6 +43,13 @@ namespace DVLD
             {
                 MessageBox.Show("Login Faild Username or Password Is Incorrect", "Login Faild", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+   
+        }
+
+        private void frmLoginScreen_Load(object sender, EventArgs e)
+        {
+            tbUsername.Text = Properties.Settings.Default.Username;
+            tbPassword.Text = Properties.Settings.Default.Password;
         }
     }
 }

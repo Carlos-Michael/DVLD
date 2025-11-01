@@ -20,5 +20,11 @@ namespace DVLD
             Form frmPeople = new frmPeople();
             frmPeople.Show();
         }
+
+        private void userManagementToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form frmUser = new frmUserManagement();
+            frmUser.Show();
+        }
     }
 }

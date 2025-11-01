@@ -33,6 +33,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.btnLogin = new System.Windows.Forms.Button();
+            this.chkRemember = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // tbUsername
@@ -80,11 +81,24 @@
             this.btnLogin.UseVisualStyleBackColor = true;
             this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
             // 
+            // chkRemember
+            // 
+            this.chkRemember.AutoSize = true;
+            this.chkRemember.Checked = true;
+            this.chkRemember.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkRemember.Location = new System.Drawing.Point(186, 211);
+            this.chkRemember.Name = "chkRemember";
+            this.chkRemember.Size = new System.Drawing.Size(95, 17);
+            this.chkRemember.TabIndex = 5;
+            this.chkRemember.Text = "Remember Me";
+            this.chkRemember.UseVisualStyleBackColor = true;
+            // 
             // frmLoginScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(641, 356);
+            this.Controls.Add(this.chkRemember);
             this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -94,6 +108,7 @@
             this.MinimizeBox = false;
             this.Name = "frmLoginScreen";
             this.Text = "Login Screen";
+            this.Load += new System.EventHandler(this.frmLoginScreen_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -106,5 +121,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnLogin;
+        private System.Windows.Forms.CheckBox chkRemember;
     }
 }
