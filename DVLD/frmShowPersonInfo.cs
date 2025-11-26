@@ -18,7 +18,7 @@ namespace DVLD
         {
             InitializeComponent();
 
-            ShowPersonInfo.PersonID = PersonID;
+            showPersonInfo1.SetData(PersonID);
         }
 
         

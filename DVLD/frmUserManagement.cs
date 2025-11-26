@@ -93,7 +93,8 @@ namespace DVLD
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            frmAddNewUser AddUser = new frmAddNewUser();
+            AddUser.ShowDialog();
         }
     }
 }

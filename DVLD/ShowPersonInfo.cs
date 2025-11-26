@@ -6,7 +6,7 @@ namespace DVLD
 {
     public partial class ShowPersonInfo : UserControl
     {
-        static public int PersonID;
+        private int _PersonID;
         private clsPeople _Person;
 
         public ShowPersonInfo()
@@ -14,12 +14,18 @@ namespace DVLD
             InitializeComponent();
         }
 
+        public void SetData(int PersonID)
+        {
+            _PersonID = PersonID;
+            _LoadData();
+        }
+
         private void _LoadData()
         {
 
-            _Person = clsPeople.FindWithPersonID(PersonID);
+            _Person = clsPeople.FindWithPersonID(_PersonID);
 
-            lblPersonID.Text = PersonID.ToString();
+            lblPersonID.Text = _PersonID.ToString();
             lblName.Text = _Person.FirstName + " " + _Person.SecondName + " " + _Person.ThirdName + " " + _Person.LastName;
             lblNationalNo.Text = _Person.NationalNo;
             
@@ -49,7 +55,7 @@ namespace DVLD
 
         private void lblEdit_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Form Edit = new frmAddEditPerson(PersonID);
+            Form Edit = new frmAddEditPerson(_PersonID);
             Edit.ShowDialog();
         }
     }

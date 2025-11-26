@@ -227,6 +227,49 @@ WHERE        (Users.IsActive = @IsActive)";
 
             return datatable;
         }
+        static public int AddNew(int PersonID, string UserName, string Password, bool IsActive)
+        {
+            int ID = -1;
+
+            SqlConnection connection = new SqlConnection(clsDatabaseSettings.connectionstring);
+
+            string query = @"INSERT INTO Users (PersonID, UserName, Password, IsActive)
+    VALUES (@PersonID, @UserName, @Password, @IsActive);
+SELECT SCOPE_IDENTITY();";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@PersonID", PersonID);
+            command.Parameters.AddWithValue("@UserName", UserName);
+            command.Parameters.AddWithValue("@Password", Password);
+            command.Parameters.AddWithValue("@IsActive", IsActive);
+
+            try
+            {
+                connection.Open();
+                object result = command.ExecuteScalar();
+
+                if (result != null && int.TryParse(result.ToString(), out int insertedID))
+                {
+                    ID = insertedID;
+                }
+                else
+                {
+                    ID = -1;
+                }
+
+            }
+            catch
+            {
+                ID = -1;
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return ID;
+        }
 
     }
 }

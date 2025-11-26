@@ -10,7 +10,8 @@ namespace DVLD
     public partial class frmAddEditPerson : Form
     {
 
-        
+        public delegate void DataBackHandler(int PersonID);
+        public event DataBackHandler DataBack;
         private enum _enMode { AddNew = 0, Edit = 1 }
         private _enMode _Mode;
         private int _PersonID;
@@ -134,6 +135,7 @@ namespace DVLD
                 {
                     File.Copy(openFileDialog1.FileName, ImageName);
                 }
+                DataBack?.Invoke(_Person.PersonID);
             }
             else
             {
