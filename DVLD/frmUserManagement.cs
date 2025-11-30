@@ -137,5 +137,11 @@ namespace DVLD
             EditUser.ShowDialog();
             _UpdateUsers(clsUser.GetAllUsers());
         }
+
+        private void changePasswordToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmChangePassword ChangePassword = new frmChangePassword((int)dataGridView1.CurrentRow.Cells[0].Value);
+            ChangePassword.ShowDialog();
+        }
     }
 }
