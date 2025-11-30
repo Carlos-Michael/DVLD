@@ -5,19 +5,58 @@ using System.Windows.Forms;
 
 namespace DVLD
 {
-    public partial class frmAddNewUser : Form
+    public partial class frmAddEditUser : Form
     {
         private clsUser _User;
         private int _PersonID;
-        public frmAddNewUser()
+        private int _UserID;
+        private enum _enMode { AddNew = 0, Edit = 1 }
+        private _enMode _Mode;
+        public frmAddEditUser(int UserID)
         {
             InitializeComponent();
+
+            _UserID = UserID;
         }
         private void frmAddNewUser_Load(object sender, EventArgs e)
         {
             cbFilter.SelectedIndex = 0;
+
+            if (_UserID == -1)
+            {
+                lblTitle.Text = "Add New User";
+                _Mode = _enMode.AddNew;
+            }
+            else 
+            {
+                lblTitle.Text = "Update User";
+                _Mode = _enMode.Edit;
+                gbFilter.Enabled = false;
+            }
+            _LoadData();
+
         }
 
+        private void _LoadData()
+        {
+            if (_Mode == _enMode.AddNew)
+            {
+                _User = new clsUser();
+                return;
+            }
+
+            _User = clsUser.FindUserWithUserID(_UserID);
+            showPersonInfo1.SetData(_User.PersonID);
+
+            lblUserID.Text = _UserID.ToString();
+            tbUsername.Text = _User.Username;
+            tbPassword.Text = _User.Password;
+            tbConfirmPassword.Text = _User.Password;
+            chkIsActive.Checked = _User.IsActive;
+
+            cbFilter.SelectedIndex = 1;
+            mtbFilter.Text = _User.PersonID.ToString();
+        }
 
         private void cbFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -83,7 +122,6 @@ namespace DVLD
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            _User = new clsUser();
             _User.PersonID = _PersonID;
             _User.Username = tbUsername.Text;
             _User.Password = tbPassword.Text;
@@ -91,8 +129,12 @@ namespace DVLD
 
             if (_User.Save())
             {
-                MessageBox.Show("User Saved Successfully", "User Saved", MessageBoxButtons.OK);
-                lblUserID.Text = _User.UserID.ToString();
+                MessageBox.Show("User Saved Successfully", "User Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                if (_Mode == _enMode.AddNew)
+                {
+                    _UserID = _User.UserID;
+                    lblUserID.Text = _UserID.ToString();
+                }
             }
             else
             {

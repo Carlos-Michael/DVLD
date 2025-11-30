@@ -332,5 +332,36 @@ SELECT SCOPE_IDENTITY();";
             return isFound;
         }
 
+        static public bool Update(int UserID, int PersonID, string Username, string Password, bool IsActive)
+        {
+            int RowsAffcted = 0;
+
+            SqlConnection connection = new SqlConnection(clsDatabaseSettings.connectionstring);
+
+            string query = "Update Users Set UserName = @UserName, Password = @Password, IsActive = @IsActive WHERE UserID = @UserID";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            //command.Parameters.AddWithValue("@PersonID", PersonID);
+            command.Parameters.AddWithValue("@UserName", Username);
+            command.Parameters.AddWithValue("@Password", Password);
+            command.Parameters.AddWithValue("@IsActive", IsActive);
+            command.Parameters.AddWithValue("@UserID", UserID);
+
+            try 
+            {
+                connection.Open();
+
+                RowsAffcted = command.ExecuteNonQuery();
+
+            }
+            catch { }
+            finally
+            {
+                connection.Close();
+            }
+
+            return (RowsAffcted > 0);
+        }
     }
 }

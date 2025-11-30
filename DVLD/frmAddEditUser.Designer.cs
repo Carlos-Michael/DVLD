@@ -1,6 +1,6 @@
 ﻿namespace DVLD
 {
-    partial class frmAddNewUser
+    partial class frmAddEditUser
     {
         /// <summary>
         /// Required designer variable.
@@ -31,43 +31,43 @@
             this.components = new System.ComponentModel.Container();
             this.tabAddUser = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnNext = new System.Windows.Forms.Button();
+            this.gbFilter = new System.Windows.Forms.GroupBox();
+            this.btnAddUser = new System.Windows.Forms.Button();
+            this.btnSearchUser = new System.Windows.Forms.Button();
             this.mtbFilter = new System.Windows.Forms.MaskedTextBox();
             this.cbFilter = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.gbPersonInfo = new System.Windows.Forms.GroupBox();
             this.showPersonInfo1 = new DVLD.ShowPersonInfo();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.chkIsActive = new System.Windows.Forms.CheckBox();
             this.lblUserID = new System.Windows.Forms.Label();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.label6 = new System.Windows.Forms.Label();
             this.tbPassword = new System.Windows.Forms.TextBox();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.label5 = new System.Windows.Forms.Label();
             this.tbConfirmPassword = new System.Windows.Forms.TextBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.label4 = new System.Windows.Forms.Label();
             this.tbUsername = new System.Windows.Forms.TextBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblTitle = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.btnSave = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
-            this.btnNext = new System.Windows.Forms.Button();
-            this.btnAddUser = new System.Windows.Forms.Button();
-            this.btnSearchUser = new System.Windows.Forms.Button();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tabAddUser.SuspendLayout();
             this.tabPage2.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.gbFilter.SuspendLayout();
+            this.gbPersonInfo.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // tabAddUser
@@ -83,8 +83,8 @@
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.btnNext);
-            this.tabPage2.Controls.Add(this.groupBox2);
-            this.tabPage2.Controls.Add(this.groupBox1);
+            this.tabPage2.Controls.Add(this.gbFilter);
+            this.tabPage2.Controls.Add(this.gbPersonInfo);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -93,19 +93,51 @@
             this.tabPage2.Text = "Personal Info";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // groupBox2
+            // btnNext
             // 
-            this.groupBox2.Controls.Add(this.btnAddUser);
-            this.groupBox2.Controls.Add(this.btnSearchUser);
-            this.groupBox2.Controls.Add(this.mtbFilter);
-            this.groupBox2.Controls.Add(this.cbFilter);
-            this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Location = new System.Drawing.Point(9, 6);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(687, 55);
-            this.groupBox2.TabIndex = 1;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Filter";
+            this.btnNext.Image = global::DVLD.Properties.Resources.Next_32;
+            this.btnNext.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnNext.Location = new System.Drawing.Point(597, 318);
+            this.btnNext.Name = "btnNext";
+            this.btnNext.Size = new System.Drawing.Size(102, 37);
+            this.btnNext.TabIndex = 2;
+            this.btnNext.Text = "Next";
+            this.btnNext.UseVisualStyleBackColor = true;
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
+            // 
+            // gbFilter
+            // 
+            this.gbFilter.Controls.Add(this.btnAddUser);
+            this.gbFilter.Controls.Add(this.btnSearchUser);
+            this.gbFilter.Controls.Add(this.mtbFilter);
+            this.gbFilter.Controls.Add(this.cbFilter);
+            this.gbFilter.Controls.Add(this.label2);
+            this.gbFilter.Location = new System.Drawing.Point(9, 6);
+            this.gbFilter.Name = "gbFilter";
+            this.gbFilter.Size = new System.Drawing.Size(687, 55);
+            this.gbFilter.TabIndex = 1;
+            this.gbFilter.TabStop = false;
+            this.gbFilter.Text = "Filter";
+            // 
+            // btnAddUser
+            // 
+            this.btnAddUser.Image = global::DVLD.Properties.Resources.AddPerson_32;
+            this.btnAddUser.Location = new System.Drawing.Point(426, 15);
+            this.btnAddUser.Name = "btnAddUser";
+            this.btnAddUser.Size = new System.Drawing.Size(35, 34);
+            this.btnAddUser.TabIndex = 15;
+            this.btnAddUser.UseVisualStyleBackColor = true;
+            this.btnAddUser.Click += new System.EventHandler(this.btnAddUser_Click);
+            // 
+            // btnSearchUser
+            // 
+            this.btnSearchUser.Image = global::DVLD.Properties.Resources.SearchPerson;
+            this.btnSearchUser.Location = new System.Drawing.Point(385, 15);
+            this.btnSearchUser.Name = "btnSearchUser";
+            this.btnSearchUser.Size = new System.Drawing.Size(35, 34);
+            this.btnSearchUser.TabIndex = 14;
+            this.btnSearchUser.UseVisualStyleBackColor = true;
+            this.btnSearchUser.Click += new System.EventHandler(this.btnSearchUser_Click);
             // 
             // mtbFilter
             // 
@@ -140,15 +172,15 @@
             this.label2.TabIndex = 11;
             this.label2.Text = "Filter By:";
             // 
-            // groupBox1
+            // gbPersonInfo
             // 
-            this.groupBox1.Controls.Add(this.showPersonInfo1);
-            this.groupBox1.Location = new System.Drawing.Point(3, 77);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(707, 235);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Person Info";
+            this.gbPersonInfo.Controls.Add(this.showPersonInfo1);
+            this.gbPersonInfo.Location = new System.Drawing.Point(3, 77);
+            this.gbPersonInfo.Name = "gbPersonInfo";
+            this.gbPersonInfo.Size = new System.Drawing.Size(707, 235);
+            this.gbPersonInfo.TabIndex = 0;
+            this.gbPersonInfo.TabStop = false;
+            this.gbPersonInfo.Text = "Person Info";
             // 
             // showPersonInfo1
             // 
@@ -201,6 +233,16 @@
             this.lblUserID.TabIndex = 15;
             this.lblUserID.Text = "??";
             // 
+            // pictureBox4
+            // 
+            this.pictureBox4.Image = global::DVLD.Properties.Resources.Number_32;
+            this.pictureBox4.Location = new System.Drawing.Point(127, 34);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(22, 15);
+            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox4.TabIndex = 14;
+            this.pictureBox4.TabStop = false;
+            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -219,6 +261,16 @@
             this.tbPassword.Size = new System.Drawing.Size(125, 20);
             this.tbPassword.TabIndex = 12;
             this.tbPassword.Validated += new System.EventHandler(this.tbUsername_Validated);
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Image = global::DVLD.Properties.Resources.Number_32;
+            this.pictureBox3.Location = new System.Drawing.Point(127, 94);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(22, 15);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox3.TabIndex = 11;
+            this.pictureBox3.TabStop = false;
             // 
             // label5
             // 
@@ -239,6 +291,16 @@
             this.tbConfirmPassword.TabIndex = 9;
             this.tbConfirmPassword.Validated += new System.EventHandler(this.tbUsername_Validated);
             // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::DVLD.Properties.Resources.Number_32;
+            this.pictureBox2.Location = new System.Drawing.Point(127, 124);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(22, 15);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox2.TabIndex = 8;
+            this.pictureBox2.TabStop = false;
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -257,6 +319,16 @@
             this.tbUsername.TabIndex = 6;
             this.tbUsername.Validated += new System.EventHandler(this.tbUsername_Validated);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::DVLD.Properties.Resources.Person_32;
+            this.pictureBox1.Location = new System.Drawing.Point(127, 64);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(22, 15);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 5;
+            this.pictureBox1.TabStop = false;
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -267,16 +339,16 @@
             this.label3.TabIndex = 0;
             this.label3.Text = "Username: ";
             // 
-            // label1
+            // lblTitle
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 32F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.Crimson;
-            this.label1.Location = new System.Drawing.Point(258, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(209, 51);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Add User";
+            this.lblTitle.AutoSize = true;
+            this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 32F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitle.ForeColor = System.Drawing.Color.Crimson;
+            this.lblTitle.Location = new System.Drawing.Point(258, 9);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new System.Drawing.Size(209, 51);
+            this.lblTitle.TabIndex = 1;
+            this.lblTitle.Text = "Add User";
             // 
             // errorProvider1
             // 
@@ -314,104 +386,32 @@
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
-            // btnNext
-            // 
-            this.btnNext.Image = global::DVLD.Properties.Resources.Next_32;
-            this.btnNext.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnNext.Location = new System.Drawing.Point(597, 318);
-            this.btnNext.Name = "btnNext";
-            this.btnNext.Size = new System.Drawing.Size(102, 37);
-            this.btnNext.TabIndex = 2;
-            this.btnNext.Text = "Next";
-            this.btnNext.UseVisualStyleBackColor = true;
-            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
-            // 
-            // btnAddUser
-            // 
-            this.btnAddUser.Image = global::DVLD.Properties.Resources.AddPerson_32;
-            this.btnAddUser.Location = new System.Drawing.Point(426, 15);
-            this.btnAddUser.Name = "btnAddUser";
-            this.btnAddUser.Size = new System.Drawing.Size(35, 34);
-            this.btnAddUser.TabIndex = 15;
-            this.btnAddUser.UseVisualStyleBackColor = true;
-            this.btnAddUser.Click += new System.EventHandler(this.btnAddUser_Click);
-            // 
-            // btnSearchUser
-            // 
-            this.btnSearchUser.Image = global::DVLD.Properties.Resources.SearchPerson;
-            this.btnSearchUser.Location = new System.Drawing.Point(385, 15);
-            this.btnSearchUser.Name = "btnSearchUser";
-            this.btnSearchUser.Size = new System.Drawing.Size(35, 34);
-            this.btnSearchUser.TabIndex = 14;
-            this.btnSearchUser.UseVisualStyleBackColor = true;
-            this.btnSearchUser.Click += new System.EventHandler(this.btnSearchUser_Click);
-            // 
-            // pictureBox4
-            // 
-            this.pictureBox4.Image = global::DVLD.Properties.Resources.Number_32;
-            this.pictureBox4.Location = new System.Drawing.Point(127, 34);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(22, 15);
-            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox4.TabIndex = 14;
-            this.pictureBox4.TabStop = false;
-            // 
-            // pictureBox3
-            // 
-            this.pictureBox3.Image = global::DVLD.Properties.Resources.Number_32;
-            this.pictureBox3.Location = new System.Drawing.Point(127, 94);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(22, 15);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox3.TabIndex = 11;
-            this.pictureBox3.TabStop = false;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Image = global::DVLD.Properties.Resources.Number_32;
-            this.pictureBox2.Location = new System.Drawing.Point(127, 124);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(22, 15);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox2.TabIndex = 8;
-            this.pictureBox2.TabStop = false;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::DVLD.Properties.Resources.Person_32;
-            this.pictureBox1.Location = new System.Drawing.Point(127, 64);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(22, 15);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 5;
-            this.pictureBox1.TabStop = false;
-            // 
-            // frmAddNewUser
+            // frmAddEditUser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(713, 495);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.button4);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.tabAddUser);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "frmAddNewUser";
+            this.Name = "frmAddEditUser";
             this.Text = "Add New Person";
             this.Load += new System.EventHandler(this.frmAddNewUser_Load);
             this.tabAddUser.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
+            this.gbFilter.ResumeLayout(false);
+            this.gbFilter.PerformLayout();
+            this.gbPersonInfo.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -421,10 +421,10 @@
 
         private System.Windows.Forms.TabControl tabAddUser;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox gbPersonInfo;
         private ShowPersonInfo showPersonInfo1;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.GroupBox gbFilter;
+        private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Button btnSearchUser;
         private System.Windows.Forms.MaskedTextBox mtbFilter;
         private System.Windows.Forms.ComboBox cbFilter;

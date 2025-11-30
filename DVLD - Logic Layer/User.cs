@@ -100,13 +100,25 @@ namespace DVLD___Logic_Layer
             return clsUserDataAccess.Delete(ID);
         }
 
+        private  bool _Update()
+        {
+            return clsUserDataAccess.Update(this.UserID, this.PersonID, this.Username, this.Password, this.IsActive);
+        }
+
         public bool Save()
         {
-            if (_Mode == _enMode.AddNew)
+            switch (_Mode)
             {
-                return _AddNew();
+                case _enMode.AddNew:
+                    return _AddNew();
+
+                case _enMode.Update:
+                    return _Update();
+
+                default:
+                    return false;
             }
-            return false;
+
         }
     }
 }

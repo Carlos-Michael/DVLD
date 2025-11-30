@@ -36,6 +36,7 @@ namespace DVLD
             {
                 mtbFilter.Visible = false;
                 cbActive.Visible = true;
+                cbActive.SelectedIndex = 0;
                 return;
             }
             if (cbFilter.SelectedItem.ToString() != "None")
@@ -93,8 +94,9 @@ namespace DVLD
 
         private void button1_Click(object sender, EventArgs e)
         {
-            frmAddNewUser AddUser = new frmAddNewUser();
+            frmAddEditUser AddUser = new frmAddEditUser(-1);
             AddUser.ShowDialog();
+            _UpdateUsers(clsUser.GetAllUsers());
         }
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
@@ -119,6 +121,21 @@ namespace DVLD
         {
             frmShowUserInfo UserInfo = new frmShowUserInfo((int)dataGridView1.CurrentRow.Cells[0].Value, (int)dataGridView1.CurrentRow.Cells[1].Value);
             UserInfo.ShowDialog();
+        }
+
+        private void addNewToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmAddEditUser AddUser = new frmAddEditUser(-1);
+            AddUser.ShowDialog();
+            _UpdateUsers(clsUser.GetAllUsers());
+
+        }
+
+        private void editToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmAddEditUser EditUser = new frmAddEditUser((int)dataGridView1.CurrentRow.Cells[0].Value);
+            EditUser.ShowDialog();
+            _UpdateUsers(clsUser.GetAllUsers());
         }
     }
 }
