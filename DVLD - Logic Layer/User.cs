@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using System.Globalization;
 using DVLD___Data_Access_Layer;
 
 namespace DVLD___Logic_Layer
@@ -24,6 +25,17 @@ namespace DVLD___Logic_Layer
             IsActive = false;
             _Mode = _enMode.AddNew;
         }
+
+        public clsUser(int UserID, int PersonID, string Username, string Password, bool IsActive)
+        {
+            this.UserID = UserID;
+            this.PersonID = PersonID;
+            this.Username = Username;
+            this.Password = Password;
+            this.IsActive = IsActive;
+
+            _Mode = _enMode.Update;
+        }
         public static bool Login (string Useraname, string Password)
         {
             return clsUserDataAccess.Login (Useraname, Password);
@@ -34,12 +46,12 @@ namespace DVLD___Logic_Layer
             return clsUserDataAccess.GetAllUsers();
         }
 
-        public static DataTable GetUserWithID(string ID)
+        public static DataTable GetUserWithID(int ID)
         {
             return clsUserDataAccess.GetUserWithID(ID);
         }
 
-        public static DataTable GetUserWithPersonID(string ID)
+        public static DataTable GetUserWithPersonID(int ID)
         {
             return clsUserDataAccess.GetUserWithPersonID(ID);
         }
@@ -59,11 +71,33 @@ namespace DVLD___Logic_Layer
             return clsUserDataAccess.GetUserWithIsActive(IsActive);
         }
 
+        public static clsUser FindUserWithUserID(int UserID)
+        {
+            int personID = -1;
+            string username = string.Empty;
+            string password = string.Empty;
+            bool isActive = false;
+
+            if (clsUserDataAccess.FindWithUserID(UserID, ref personID, ref username, ref password, ref isActive))
+            {
+                return new clsUser(UserID, personID, username, password, isActive);
+            }
+            else
+            {
+                return null;
+            }
+
+        }
         private bool _AddNew()
         {
             this.UserID = clsUserDataAccess.AddNew(this.PersonID, this.Username, this.Password, this.IsActive);
 
             return UserID != -1;
+        }
+
+        static public bool Delete(int ID)
+        {
+            return clsUserDataAccess.Delete(ID);
         }
 
         public bool Save()

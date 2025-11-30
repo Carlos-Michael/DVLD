@@ -50,11 +50,11 @@ namespace DVLD
             switch (cbFilter.SelectedItem.ToString())
             {
                 case "UserID":
-                    _UpdateUsers(clsUser.GetUserWithID(mtbFilter.Text));
+                    _UpdateUsers(clsUser.GetUserWithID((int.Parse(mtbFilter.Text))));
                     break;
 
                 case "PersonID":
-                    _UpdateUsers(clsUser.GetUserWithPersonID(mtbFilter.Text));
+                    _UpdateUsers(clsUser.GetUserWithPersonID(int.Parse(mtbFilter.Text)));
                     break;
 
                 case "FullName":
@@ -95,6 +95,30 @@ namespace DVLD
         {
             frmAddNewUser AddUser = new frmAddNewUser();
             AddUser.ShowDialog();
+        }
+
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            if (MessageBox.Show("Are You Sure Do You Want To Delete This User ?", "Delete User", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
+            {
+                if (clsUser.Delete((int)dataGridView1.CurrentRow.Cells[0].Value))
+                {
+                    MessageBox.Show("User Deleted Successfully", "User Deleted ", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    _UpdateUsers(clsUser.GetAllUsers());
+                }
+                else
+                {
+                    MessageBox.Show("User Delete Faild", "User Delete Faild ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+
+        }
+
+        private void showToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmShowUserInfo UserInfo = new frmShowUserInfo((int)dataGridView1.CurrentRow.Cells[0].Value, (int)dataGridView1.CurrentRow.Cells[1].Value);
+            UserInfo.ShowDialog();
         }
     }
 }

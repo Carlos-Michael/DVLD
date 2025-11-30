@@ -23,7 +23,11 @@ namespace DVLD
             
             _PersonID = PersonID;
 
-            if (PersonID == -1)
+        }
+
+        private void frmAddEditPerson_Load(object sender, EventArgs e)
+        {
+            if (_PersonID == -1)
             {
                 _Mode = _enMode.AddNew;
                 lblMode.Text = "Add New Person";
@@ -33,7 +37,7 @@ namespace DVLD
             {
                 _Mode = _enMode.Edit;
                 lblMode.Text = "Update Person Info";
-                lblPersonID.Text = PersonID.ToString();
+                lblPersonID.Text = _PersonID.ToString();
             }
 
             _LoadData();
@@ -131,11 +135,16 @@ namespace DVLD
             if (_Person.Save())
             {
                 MessageBox.Show("Person Saved successfully", "Person Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                 _PersonID = _Person.PersonID;
                 if (openFileDialog1.FileName != "")
                 {
                     File.Copy(openFileDialog1.FileName, ImageName);
                 }
-                DataBack?.Invoke(_Person.PersonID);
+                
+                DataBack?.Invoke(_PersonID);
+                _Mode = _enMode.Edit;
+                lblMode.Text = "Update Person Info";
+                lblPersonID.Text = _PersonID.ToString();
             }
             else
             {
@@ -183,8 +192,7 @@ namespace DVLD
 
         private void rbMale_CheckedChanged_1(object sender, EventArgs e)
         {
-            if (pbImage.ImageLocation == "")
-            { 
+            
                 if (sender == rbMale)
                 {
                     pbImage.Image = Properties.Resources.Male_512;
@@ -194,7 +202,6 @@ namespace DVLD
                 {
                     pbImage.Image = Properties.Resources.Female_512;
                 }
-            }
         }
     }
 }

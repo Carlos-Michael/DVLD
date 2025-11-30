@@ -63,7 +63,7 @@ FROM            Users INNER JOIN
             return datatable;
         }
 
-        public static DataTable GetUserWithID(string UserID)
+        public static DataTable GetUserWithID(int UserID)
         {
             DataTable datatable = new DataTable();
             SqlConnection connection = new SqlConnection(clsDatabaseSettings.connectionstring);
@@ -95,7 +95,7 @@ FROM            Users INNER JOIN
             return datatable;
         }
 
-        public static DataTable GetUserWithPersonID(string ID)
+        public static DataTable GetUserWithPersonID(int ID)
         {
             DataTable datatable = new DataTable();
             SqlConnection connection = new SqlConnection(clsDatabaseSettings.connectionstring);
@@ -269,6 +269,67 @@ SELECT SCOPE_IDENTITY();";
             }
 
             return ID;
+        }
+
+        static public bool Delete(int     UserID)
+        {
+            int RowsAffected = 0;
+            SqlConnection connection = new SqlConnection(clsDatabaseSettings.connectionstring);
+
+            string query = @"Delete from Users WHERE UserID = @ID";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@ID", UserID);
+
+            try
+            {
+                connection.Open();
+                RowsAffected = command.ExecuteNonQuery();
+            }
+            catch { }
+            finally
+            {
+                connection.Close();
+            }
+
+            return (RowsAffected > 0);
+        }
+
+        static public bool FindWithUserID(int UserID, ref int PersonID, ref string Username, ref string Password, ref bool IsActive)
+        {
+            bool isFound = false;
+            SqlConnection connection = new SqlConnection(clsDatabaseSettings.connectionstring);
+
+            string query = @"SELECT * From Users WHERE UserID LIKE @UserID";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@UserID", UserID);
+
+            try
+            {
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    isFound = true;
+                    PersonID = (int)reader["PersonID"];
+                    Username = (string)reader["UserName"];
+                    Password = (string)reader["Password"];
+                    IsActive = (bool)reader["IsActive"];
+                }
+
+            }
+            catch {
+                isFound = false;
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return isFound;
         }
 
     }
