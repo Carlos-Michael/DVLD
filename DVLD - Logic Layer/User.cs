@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Globalization;
+using System.Security.Cryptography.X509Certificates;
 using DVLD___Data_Access_Layer;
 
 namespace DVLD___Logic_Layer
@@ -88,6 +89,22 @@ namespace DVLD___Logic_Layer
             }
 
         }
+        static public clsUser FindUserWithUserName(string UserName)
+        {
+            int userID = -1;
+            int personID = -1;
+            string password = string.Empty;
+            bool isActive = false;
+
+            if (clsUserDataAccess.FindWithUserName(UserName, ref personID, ref userID, ref password, ref isActive))
+            {
+                return new clsUser(userID, personID, UserName, password, isActive);
+            }
+            else
+            {
+                return null;
+            }
+        }
         private bool _AddNew()
         {
             this.UserID = clsUserDataAccess.AddNew(this.PersonID, this.Username, this.Password, this.IsActive);
@@ -95,10 +112,6 @@ namespace DVLD___Logic_Layer
             return UserID != -1;
         }
 
-        static public bool Delete(int ID)
-        {
-            return clsUserDataAccess.Delete(ID);
-        }
 
         private  bool _Update()
         {
@@ -120,5 +133,10 @@ namespace DVLD___Logic_Layer
             }
 
         }
+        static public bool Delete(int ID)
+        {
+            return clsUserDataAccess.Delete(ID);
+        }
+
     }
 }

@@ -342,7 +342,6 @@ SELECT SCOPE_IDENTITY();";
 
             SqlCommand command = new SqlCommand(query, connection);
 
-            //command.Parameters.AddWithValue("@PersonID", PersonID);
             command.Parameters.AddWithValue("@UserName", Username);
             command.Parameters.AddWithValue("@Password", Password);
             command.Parameters.AddWithValue("@IsActive", IsActive);
@@ -362,6 +361,42 @@ SELECT SCOPE_IDENTITY();";
             }
 
             return (RowsAffcted > 0);
+        }
+        static public bool FindWithUserName(string Username, ref int PersonID, ref int UserID, ref string Password, ref bool IsActive)
+        {
+            bool isFound = false;
+            SqlConnection connection = new SqlConnection(clsDatabaseSettings.connectionstring);
+
+            string query = @"SELECT * From Users WHERE UserName LIKE @UserName";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@UserName", Username);
+
+            try
+            {
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    isFound = true;
+                    UserID   = (int)reader["UserID"];
+                    PersonID = (int)reader["PersonID"];
+                    Password = (string)reader["Password"];
+                    IsActive = (bool)reader["IsActive"];
+                }
+
+            }
+            catch
+            {
+                isFound = false;
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return isFound;
         }
     }
 }

@@ -6,6 +6,7 @@ namespace DVLD
 {
     public partial class frmLoginScreen : Form
     {
+
         public frmLoginScreen()
         {
             InitializeComponent();
@@ -33,10 +34,12 @@ namespace DVLD
             if (clsUser.Login(tbUsername.Text, tbPassword.Text))
             {
                 _RememberMe();
-                Form frmHomeScreen = new Form1();
+                Form frmHomeScreen = new frmHomePage(tbUsername.Text);
                 this.Hide();
+                frmHomePage.Logout += this.Logout;
                 frmHomeScreen.ShowDialog();
-                this.Close();
+                
+                
 
             }
             else
@@ -46,6 +49,10 @@ namespace DVLD
    
         }
 
+        private void Logout()
+        {
+            this.Show();
+        }
         private void frmLoginScreen_Load(object sender, EventArgs e)
         {
             tbUsername.Text = Properties.Settings.Default.Username;
