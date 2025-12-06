@@ -1,3 +1,13 @@
-# DVLD Project
+# DVLD - Driver & Vehicle License Department
 
-A Project I Do In Course 19 In programmingadvice.com
+A Windows Forms application for managing driver licenses and vehicle registrations.
+
+## Technologies
+
+- C# .NET Framework
+- Windows Forms
+- SQL Server
+
+## Course
+
+Course 19: Building DVLD Project at [ProgrammingAdvices.com](https://programmingadvices.com)
