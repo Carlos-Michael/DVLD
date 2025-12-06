@@ -47,6 +47,7 @@
     <Compile Include="clsCountryDataAccess.cs" />
     <Compile Include="clsDatabaseSettings.cs" />
     <Compile Include="clsPeopleDataAccess.cs" />
+    <Compile Include="clsTestTypesDataAccess.cs" />
     <Compile Include="clsUserDataAccess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

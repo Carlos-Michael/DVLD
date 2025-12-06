@@ -38,6 +38,7 @@
             this.changePasswordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.logOutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.manageTestTypesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -61,7 +62,8 @@
             // applicationsToolStripMenuItem
             // 
             this.applicationsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.manageApplicationTypesToolStripMenuItem});
+            this.manageApplicationTypesToolStripMenuItem,
+            this.manageTestTypesToolStripMenuItem});
             this.applicationsToolStripMenuItem.Image = global::DVLD.Properties.Resources.Applications_64;
             this.applicationsToolStripMenuItem.Name = "applicationsToolStripMenuItem";
             this.applicationsToolStripMenuItem.Size = new System.Drawing.Size(118, 46);
@@ -134,6 +136,14 @@
             this.logOutToolStripMenuItem.Text = "Log Out";
             this.logOutToolStripMenuItem.Click += new System.EventHandler(this.logOutToolStripMenuItem_Click);
             // 
+            // manageTestTypesToolStripMenuItem
+            // 
+            this.manageTestTypesToolStripMenuItem.Image = global::DVLD.Properties.Resources.Test_Type_64;
+            this.manageTestTypesToolStripMenuItem.Name = "manageTestTypesToolStripMenuItem";
+            this.manageTestTypesToolStripMenuItem.Size = new System.Drawing.Size(233, 38);
+            this.manageTestTypesToolStripMenuItem.Text = "Manage Test Types";
+            this.manageTestTypesToolStripMenuItem.Click += new System.EventHandler(this.manageTestTypesToolStripMenuItem_Click);
+            // 
             // frmHomePage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -166,6 +176,7 @@
         private System.Windows.Forms.ToolStripMenuItem logOutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem applicationsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem manageApplicationTypesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem manageTestTypesToolStripMenuItem;
     }
 }
 
