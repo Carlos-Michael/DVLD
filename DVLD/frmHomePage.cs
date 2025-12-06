@@ -57,5 +57,17 @@ namespace DVLD
         {
             Application.Exit();
         }
+
+        private void manageApplicationTypesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmManageApplicationTypes applicationTyps = new frmManageApplicationTypes();
+            applicationTyps.ShowDialog();
+        }
+
+        private void manageTestTypesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmManageTestTypes manageTestTypes = new frmManageTestTypes();
+            manageTestTypes.ShowDialog();
+        }
     }
 }
