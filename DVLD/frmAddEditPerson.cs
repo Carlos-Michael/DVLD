@@ -165,7 +165,7 @@ namespace DVLD
             {
                 errorProvider1.SetError((Control)sender, "");
             }
-            if (sender == tbNationalNo && clsPeople.IsExist(tbNationalNo.Text))
+            if (sender == tbNationalNo && clsPeople.IsExistWithNationalNo(tbNationalNo.Text))
             {
                 errorProvider1.SetError((MaskedTextBox)sender, "National Number Is Exist");
             }

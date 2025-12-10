@@ -187,11 +187,15 @@ namespace DVLD___Logic_Layer
             }
         }
 
-        public static bool IsExist(string NationalNo)
+        public static bool IsExistWithNationalNo(string NationalNo)
         {
-            return clsPeopleDataAccess.IsExist(NationalNo);
+            return clsPeopleDataAccess.IsExistWithNationalNo(NationalNo);
         }
 
+        public static bool IsExistWithPersonID(int PersonID)
+        {
+            return clsPeopleDataAccess.IsExistWithPersonID(PersonID);
+        }
         public static bool DeletePerson(int PersonID)
         {
             return clsPeopleDataAccess.DeletePerson(PersonID);

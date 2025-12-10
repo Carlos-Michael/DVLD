@@ -285,7 +285,7 @@ Where PersonID = @PersonID";
             }
             return (RowsAffected > 0);
         }
-        static public bool IsExist(string NationalNo)
+        static public bool IsExistWithNationalNo(string NationalNo)
         {
             bool IsFound = false;
             SqlConnection connection = new SqlConnection(clsDatabaseSettings.connectionstring);
@@ -309,7 +309,31 @@ Where PersonID = @PersonID";
             }
             return IsFound;
         }
-        
+
+        static public bool IsExistWithPersonID(int PersonID)
+        {
+            bool IsFound = false;
+            SqlConnection connection = new SqlConnection(clsDatabaseSettings.connectionstring);
+
+            string query = @"SELECT isfound = 1 FROM People WHERE PersonID = @PersonID;";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@PersonID", PersonID);
+
+            try
+            {
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                IsFound = reader.HasRows;
+            }
+            catch { }
+            finally
+            {
+                connection.Close();
+            }
+            return IsFound;
+        }
         static public bool DeletePerson(int PersonID)
         {
             int RowsAffected = 0;
