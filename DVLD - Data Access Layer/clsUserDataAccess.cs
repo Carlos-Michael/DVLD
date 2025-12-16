@@ -321,6 +321,7 @@ SELECT SCOPE_IDENTITY();";
                     IsActive = (bool)reader["IsActive"];
                 }
 
+                reader.Close();
             }
             catch {
                 isFound = false;

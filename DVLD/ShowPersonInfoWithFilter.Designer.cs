@@ -88,7 +88,6 @@
             // 
             this.cbFilter.FormattingEnabled = true;
             this.cbFilter.Items.AddRange(new object[] {
-            "None",
             "PersonID",
             "National No"});
             this.cbFilter.Location = new System.Drawing.Point(69, 22);
