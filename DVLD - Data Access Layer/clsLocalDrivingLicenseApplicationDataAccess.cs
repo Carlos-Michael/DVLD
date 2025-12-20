@@ -45,5 +45,78 @@ namespace DVLD___Data_Access_Layer9
 
             return ID;
         }
+
+
+        static public int IsExist(int PersonID, int LicenseClassID)
+        {
+            int ApplicationID;
+            SqlConnection connection = new SqlConnection(clsDatabaseSettings.connectionstring);
+
+            string query = @"SELECT        LocalDrivingLicenseApplications.LocalDrivingLicenseApplicationID FROM            LocalDrivingLicenseApplications INNER JOIN Applications ON LocalDrivingLicenseApplications.ApplicationID = Applications.ApplicationID WHERE        (LocalDrivingLicenseApplications.LicenseClassID = @LicenseClassID) AND (Applications.ApplicantPersonID = @PersonID)";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@LicenseClassID", LicenseClassID);
+            command.Parameters.AddWithValue("@PersonID", PersonID);
+
+            try
+            {
+                connection.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    ApplicationID = (int)reader["LocalDrivingLicenseApplicationID"];
+                }
+                else
+                {
+                    ApplicationID = -1;
+                }
+                reader.Close();
+            }
+            catch
+            {
+                ApplicationID = -1;
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return ApplicationID;
+        }
+
+        static public DataTable GetAllLocalDrivingLicenseApplications()
+        {
+            DataTable dt = new DataTable();
+
+            SqlConnection connection = new SqlConnection(clsDatabaseSettings.connectionstring);
+            
+            string query = "SELECT * From LocalDrivingLicenseApplications_View";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            try
+            {
+                connection.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    dt.Load(reader);
+                }
+
+                reader.Close();
+            }
+            catch { }
+            finally
+            {
+                connection.Close();
+            }
+
+            return dt;
+        }
     }
 }

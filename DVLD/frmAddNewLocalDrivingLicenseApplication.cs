@@ -60,7 +60,7 @@ namespace DVLD
 
         private void btnNext_Click(object sender, EventArgs e)
         {
-            tabNewApplication.TabIndex = ;
+            tabNewApplication.TabIndex = 1;
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -70,6 +70,13 @@ namespace DVLD
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            _LocalDrivingLicenseApplications = new clsLocalDrivingLicenseApplications();
+            _LocalDrivingLicenseApplications.LocalDrivingLicenseApplicationID = clsLocalDrivingLicenseApplications.IsExist(showPersonInfoWithFilter1.PersonID, _LicenseClass.LicenseClassID);
+            if (_LocalDrivingLicenseApplications.LocalDrivingLicenseApplicationID != -1)
+            {
+                MessageBox.Show($"Choose Another License Class , The selected Person Already \n have an active application for the selected class with id = {_LocalDrivingLicenseApplications.LocalDrivingLicenseApplicationID}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             _Application = new clsApplications();
             _Application.ApplicationPersonID = showPersonInfoWithFilter1.PersonID;
             _Application.ApplicationDate = DateTime.Now;
@@ -81,7 +88,6 @@ namespace DVLD
 
             if (_Application.Add())
             {
-                _LocalDrivingLicenseApplications = new clsLocalDrivingLicenseApplications();
                 _LocalDrivingLicenseApplications.ApplicationID = _Application.ApplicationID;
                 _LocalDrivingLicenseApplications.LicenseClassID = _LicenseClass.LicenseClassID;
 

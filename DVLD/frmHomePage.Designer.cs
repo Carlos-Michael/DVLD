@@ -95,7 +95,7 @@
             // 
             this.localDrivingLicenseToolStripMenuItem.Image = global::DVLD.Properties.Resources.Local_32;
             this.localDrivingLicenseToolStripMenuItem.Name = "localDrivingLicenseToolStripMenuItem";
-            this.localDrivingLicenseToolStripMenuItem.Size = new System.Drawing.Size(196, 38);
+            this.localDrivingLicenseToolStripMenuItem.Size = new System.Drawing.Size(162, 38);
             this.localDrivingLicenseToolStripMenuItem.Text = "Local License";
             this.localDrivingLicenseToolStripMenuItem.Click += new System.EventHandler(this.localDrivingLicenseToolStripMenuItem_Click);
             // 
@@ -184,7 +184,7 @@
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "frmHomePage";
-            this.Text = "Form1";
+            this.Text = "Home Page";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmHomePage_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
