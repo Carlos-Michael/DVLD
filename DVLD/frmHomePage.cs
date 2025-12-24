@@ -25,13 +25,13 @@ namespace DVLD
         private void peopleManagementToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form frmPeople = new frmPeople();
-            frmPeople.Show();
+            frmPeople.ShowDialog();
         }
 
         private void userManagementToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form frmUser = new frmUserManagement();
-            frmUser.Show();
+            frmUser.ShowDialog();
         }
 
         private void currentUserInfoToolStripMenuItem_Click(object sender, EventArgs e)
@@ -73,6 +73,11 @@ namespace DVLD
         {
             frmAddNewLocalDrivingLicenseApplication AddNewLocalDrivingLicense = new frmAddNewLocalDrivingLicenseApplication(_User);
             AddNewLocalDrivingLicense.ShowDialog();
+        }
+        private void localDrivingLicenseApplicationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmLocalDrivingLicense localDrivingLIcense = new frmLocalDrivingLicense(_User);
+            localDrivingLIcense.ShowDialog(); 
         }
     }
 }

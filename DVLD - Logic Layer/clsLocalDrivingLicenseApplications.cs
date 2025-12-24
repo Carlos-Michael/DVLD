@@ -32,5 +32,24 @@ namespace DVLD___Logic_Layer
             return clsLocalDrivingLicenseApplicationsDataAccess.GetAllLocalDrivingLicenseApplications();
         }
 
+        static public DataTable GetLocalDrivingLicenseApplicationsWithID(int ID)
+        {
+            return clsLocalDrivingLicenseApplicationsDataAccess.GetLocalDrivingLicenseApplicationsWithID(ID);
+        }
+
+        static public DataTable GetLocalDrivingLicenseApplicationsWithNationalNo(string NationalNo)
+        {
+            return clsLocalDrivingLicenseApplicationsDataAccess.GetLocalDrivingLicenseApplicationsWithNationalNo(NationalNo);
+        }
+        static public DataTable GetLocalDrivingLicenseApplicationsWithFullName(string FullName)
+        {
+            return clsLocalDrivingLicenseApplicationsDataAccess.GetLocalDrivingLicenseApplicationsWithFullName(FullName);
+        }
+
+        static public DataTable GetLocalDrivingLicenseApplicationsWithStatus(string Status)
+        {
+            return clsLocalDrivingLicenseApplicationsDataAccess.GetLocalDrivingLicenseApplicationsWithStatus(Status);
+        }
+
     }
 }
