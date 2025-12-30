@@ -114,7 +114,7 @@ namespace DVLD
                 case "New":
                     _UpdateLocalDrivingLicense(clsLocalDrivingLicenseApplications.GetLocalDrivingLicenseApplicationsWithStatus("New"));
                     break;
-                case "Canceled":
+                case "Cancelled":
                     _UpdateLocalDrivingLicense(clsLocalDrivingLicenseApplications.GetLocalDrivingLicenseApplicationsWithStatus("Cancelled"));
                     break;
                 case "Completed":
@@ -122,6 +122,13 @@ namespace DVLD
                     break;
 
             }
+        }
+
+        private void cancelApplicationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+            clsApplications.Cancel(clsLocalDrivingLicenseApplications.FindLocalDrivingLicenseApplicationsID((int)dgvLocalDrivingLicense.CurrentRow.Cells[0].Value).ApplicationID);
+            _UpdateLocalDrivingLicense(clsLocalDrivingLicenseApplications.GetAllLocalDrivingLicenseApplications());
         }
     }
 }

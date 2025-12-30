@@ -60,7 +60,7 @@ namespace DVLD
 
         private void btnNext_Click(object sender, EventArgs e)
         {
-            tabNewApplication.TabIndex = 1;
+            tabNewApplication.SelectedIndex = 1;
         }
 
         private void button4_Click(object sender, EventArgs e)

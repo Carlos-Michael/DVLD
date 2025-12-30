@@ -55,5 +55,38 @@ SELECT SCOPE_IDENTITY();";
             }
             return ApplicationID;
         }
+
+        public static bool Cancel(int AppID)
+        {
+            int RowsAffected = 0;
+
+            SqlConnection connection = new SqlConnection(clsDatabaseSettings.connectionstring);
+
+            string query = "Update Applications SET ApplicationStatus = 2 WHERE ApplicationID = @AppID";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@AppID", AppID);
+
+            try
+            {
+                connection.Open();
+
+                RowsAffected = command.ExecuteNonQuery();
+
+
+            }
+            catch
+            {
+                RowsAffected = 0;
+            }
+            finally
+            {
+                connection.Close();
+            }
+           
+            return RowsAffected > 0;
+
+        }
     }
 }

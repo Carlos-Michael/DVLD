@@ -29,5 +29,10 @@ namespace DVLD___Logic_Layer
             return ApplicationID != -1;
         }
 
+        public static bool Cancel(int AppID)
+        {
+            return clsApplicationDataAccess.Cancel(AppID);
+        }
+
     }
 }

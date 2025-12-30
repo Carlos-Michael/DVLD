@@ -15,6 +15,18 @@ namespace DVLD___Logic_Layer
         public int ApplicationID { get; set; }
         public int LicenseClassID { get; set; }
 
+        public clsLocalDrivingLicenseApplications()
+        {
+            this.LocalDrivingLicenseApplicationID = -1;
+            this.ApplicationID = -1;
+            this.LicenseClassID = -1;
+        }
+        public clsLocalDrivingLicenseApplications(int LocalDrivingLicenseApplicationID, int ApplicationID, int LicenseClassID)
+        {
+            this.LocalDrivingLicenseApplicationID = LocalDrivingLicenseApplicationID;
+            this.ApplicationID = ApplicationID;
+            this.LicenseClassID = LicenseClassID;
+        }
         public bool Add()
         {
             LocalDrivingLicenseApplicationID = clsLocalDrivingLicenseApplicationsDataAccess.AddNewLocalDrivingLicenseApplication(ApplicationID, LicenseClassID);
@@ -51,5 +63,23 @@ namespace DVLD___Logic_Layer
             return clsLocalDrivingLicenseApplicationsDataAccess.GetLocalDrivingLicenseApplicationsWithStatus(Status);
         }
 
+        static public clsLocalDrivingLicenseApplications FindLocalDrivingLicenseApplicationsID(int ID)
+        {
+            int applicationID = -1;
+            int licenseClassID = -1;
+
+            if (clsLocalDrivingLicenseApplicationsDataAccess.FindLocalDrivingLicenseApplicationsWithID(ID, ref applicationID, ref licenseClassID))
+            {
+                return new clsLocalDrivingLicenseApplications(ID, applicationID, licenseClassID);
+            }
+            else 
+            {
+                return null;
+            }
+
+        }
+
     }
 }
+
+

@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlTypes;
-using System.Linq;
-using System.Text;
 using System.Data;
 using System.Data.SqlClient;
-using System.Diagnostics.Contracts;
 
 namespace DVLD___Data_Access_Layer9
 {
@@ -18,7 +13,7 @@ namespace DVLD___Data_Access_Layer9
             SqlConnection connection = new SqlConnection(clsDatabaseSettings.connectionstring);
 
             string query = "INSERT INTO LocalDrivingLicenseApplications (ApplicationID, LicenseClassID) VALUES (@ApplicationID, @LicenseClassID) SELECT SCOPE_IDENTITY();";
-           
+
             SqlCommand command = new SqlCommand(query, connection);
 
             command.Parameters.AddWithValue("ApplicationID", ApplicationID);
@@ -34,7 +29,7 @@ namespace DVLD___Data_Access_Layer9
                     ID = insertedID;
                 }
             }
-            catch 
+            catch
             {
                 ID = -1;
             }
@@ -52,7 +47,9 @@ namespace DVLD___Data_Access_Layer9
             int ApplicationID;
             SqlConnection connection = new SqlConnection(clsDatabaseSettings.connectionstring);
 
-            string query = @"SELECT        LocalDrivingLicenseApplications.LocalDrivingLicenseApplicationID FROM            LocalDrivingLicenseApplications INNER JOIN Applications ON LocalDrivingLicenseApplications.ApplicationID = Applications.ApplicationID WHERE        (LocalDrivingLicenseApplications.LicenseClassID = @LicenseClassID) AND (Applications.ApplicantPersonID = @PersonID)";
+            string query = @"SELECT        LocalDrivingLicenseApplications.LocalDrivingLicenseApplicationID FROM            
+LocalDrivingLicenseApplications INNER JOIN Applications ON LocalDrivingLicenseApplications.ApplicationID = Applications.ApplicationID 
+WHERE        (LocalDrivingLicenseApplications.LicenseClassID = @LicenseClassID) AND (Applications.ApplicantPersonID = @PersonID)  AND (Applications.ApplicationStatus = 1)";
 
             SqlCommand command = new SqlCommand(query, connection);
 
@@ -123,7 +120,7 @@ namespace DVLD___Data_Access_Layer9
             DataTable dt = new DataTable();
 
             SqlConnection connection = new SqlConnection(clsDatabaseSettings.connectionstring);
-            
+
             string query = @"SELECT * From LocalDrivingLicenseApplications_View WHERE LocalDrivingLicenseApplicationID LIKE @ID ";
 
             SqlCommand command = new SqlCommand(query, connection);
@@ -254,6 +251,47 @@ namespace DVLD___Data_Access_Layer9
             return dt;
         }
 
+
+        static public bool FindLocalDrivingLicenseApplicationsWithID(int ID, ref int ApplicationID, ref int LicenseClassID)
+        {
+            bool isFound = false;
+            SqlConnection connection = new SqlConnection(clsDatabaseSettings.connectionstring);
+
+            string query = @"SELECT * From LocalDrivingLicenseApplications WHERE LocalDrivingLicenseApplicationID LIKE @ID ";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@ID", ID.ToString() + '%');
+
+            try
+            {
+                connection.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    isFound = true;
+                    ApplicationID = (int)reader["ApplicationID"];
+                    LicenseClassID = (int)reader["LicenseClassID"];
+                }
+
+                reader.Close();
+            }
+            catch 
+            {
+                isFound = false;
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return isFound;
+
+        } 
+    
     }
+    
 }
 
