@@ -44,7 +44,7 @@ namespace DVLD___Data_Access_Layer
         static public bool GetLicenseClassByClassName(string ClassName, ref int LicenseClassID, ref string ClassDescription, ref byte MinimumAllowedAge
             , ref byte DefultValidityLength, ref decimal ClassFees)
         {
-            bool isActive = false;
+            bool isFound = false;
 
             SqlConnection connection = new SqlConnection(clsDatabaseSettings.connectionstring);
 
@@ -62,7 +62,7 @@ namespace DVLD___Data_Access_Layer
 
                 if (reader.Read())
                 {
-                    isActive = true;
+                    isFound = true;
                     LicenseClassID = (int)reader["LicenseClassID"];
                     ClassDescription = (string)reader["ClassDescription"];
                     MinimumAllowedAge = (byte)reader["MinimumAllowedAge"];
@@ -75,14 +75,58 @@ namespace DVLD___Data_Access_Layer
             }
             catch 
             {
-                isActive = false;
+                isFound = false;
             }
             finally
             {
                 connection.Close();
             }
             
-            return isActive;
+            return isFound;
+        }
+
+        static public bool GetLicenseClassByID(int LicenseClassID, ref string ClassName, ref string ClassDescription, ref byte MinimumAllowedAge
+            , ref byte DefultValidityLength, ref decimal ClassFees)
+        {
+            bool isFound = false;
+
+            SqlConnection connection = new SqlConnection(clsDatabaseSettings.connectionstring);
+
+            string query = "SELECT * From LicenseClasses WHERE LicenseClassID = @LicenseClassID";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@LicenseClassID", LicenseClassID);
+
+            try
+            {
+                connection.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    isFound = true;
+                    ClassName = (string)reader["ClassName"];
+                    ClassDescription = (string)reader["ClassDescription"];
+                    MinimumAllowedAge = (byte)reader["MinimumAllowedAge"];
+                    DefultValidityLength = (byte)reader["DefaultValidityLength"];
+                    ClassFees = (decimal)reader["ClassFees"];
+                }
+
+                reader.Close();
+
+            }
+            catch
+            {
+                isFound = false;
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return isFound;
         }
     }
 }

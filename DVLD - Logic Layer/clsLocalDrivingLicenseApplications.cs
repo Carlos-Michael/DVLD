@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -43,26 +44,10 @@ namespace DVLD___Logic_Layer
         {
             return clsLocalDrivingLicenseApplicationsDataAccess.GetAllLocalDrivingLicenseApplications();
         }
-
-        static public DataTable GetLocalDrivingLicenseApplicationsWithID(int ID)
+        static public int GetPassedTests(int LocalDrivingLicenseApplicationID)
         {
-            return clsLocalDrivingLicenseApplicationsDataAccess.GetLocalDrivingLicenseApplicationsWithID(ID);
-        }
-
-        static public DataTable GetLocalDrivingLicenseApplicationsWithNationalNo(string NationalNo)
-        {
-            return clsLocalDrivingLicenseApplicationsDataAccess.GetLocalDrivingLicenseApplicationsWithNationalNo(NationalNo);
-        }
-        static public DataTable GetLocalDrivingLicenseApplicationsWithFullName(string FullName)
-        {
-            return clsLocalDrivingLicenseApplicationsDataAccess.GetLocalDrivingLicenseApplicationsWithFullName(FullName);
-        }
-
-        static public DataTable GetLocalDrivingLicenseApplicationsWithStatus(string Status)
-        {
-            return clsLocalDrivingLicenseApplicationsDataAccess.GetLocalDrivingLicenseApplicationsWithStatus(Status);
-        }
-
+            return clsLocalDrivingLicenseApplicationsDataAccess.GetPassedTests(LocalDrivingLicenseApplicationID);
+        }        
         static public clsLocalDrivingLicenseApplications FindLocalDrivingLicenseApplicationsID(int ID)
         {
             int applicationID = -1;
@@ -78,6 +63,12 @@ namespace DVLD___Logic_Layer
             }
 
         }
+
+        static public bool Delete(int ID)
+        {
+            return clsLocalDrivingLicenseApplicationsDataAccess.Delete(ID);
+        }
+
 
     }
 }

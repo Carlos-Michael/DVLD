@@ -80,60 +80,7 @@ namespace DVLD___Logic_Layer
         public static DataTable GetAllPeople()
         {
             return clsPeopleDataAccess.GetAllPeople();
-        }
-        public static DataTable GetPeopleWithPersonID(string PersonID)
-        {
-             return clsPeopleDataAccess.GetPeopleWithPersonID(PersonID);
-        }
-
-        public static DataTable GetPeopleWithNationalNo(string NationalNo)
-        {
-            return clsPeopleDataAccess.GetPeopleWithNationalNo(NationalNo);
-        }
-        public static DataTable GetPeopleWithFirstName(string firstName)
-        {
-            return clsPeopleDataAccess.GetPeopleWithFirstName(firstName);
-        }
-
-        public static DataTable GetPeopleWithSecondName(string secondName)
-        {
-            return clsPeopleDataAccess.GetPeopleWithSecondName(secondName);
-        }
-
-        public static DataTable GetPeopleWithThirdName(string thirdName)
-        {
-            return clsPeopleDataAccess.GetPeopleWithThirdName(thirdName);
-        }
-
-        public static DataTable GetPeopleWithLastName(string lastName)
-        {
-            return clsPeopleDataAccess.GetPeopleWithLastName(lastName);
-        }
-        public static DataTable GetPeopleWithGender(string gender)
-        {
-            return clsPeopleDataAccess.GetPeopleWithGender(gender);
-        }
-
-        public static DataTable GetPeopleWithAddress(string address)
-        {
-            return clsPeopleDataAccess.GetPeopleWithAddress(address);
-        }
-
-        public static DataTable GetPeopleWithPhone(string phone)
-        {
-            return clsPeopleDataAccess.GetPeopleWithPhone(phone);
-        }
-
-        public static DataTable GetPeopleWithEmail(string email)
-        {
-            return clsPeopleDataAccess.GetPeopleWithEmail(email);
-        }
-
-        public static DataTable GetPeopleWithNationalty(string Nationalty)
-        {
-            return clsPeopleDataAccess.GetPeopleWithNationalty(Nationalty);
-        }
-
+        }        
         public static clsPeople FindWithPersonID(int PersonID)
         {
             string nationalNo = string.Empty;
@@ -153,6 +100,27 @@ namespace DVLD___Logic_Layer
                 , ref dateOfBirth, ref address, ref gender, ref phone, ref email, ref countryID, ref imagePath);
 
             return new clsPeople(PersonID, nationalNo, firstName, secondName,thirdName, lastName, dateOfBirth, gender, address, phone, email, countryID, imagePath);
+
+                }
+        public static clsPeople FindWithNationalNo(string NationalNo)
+        {
+            int personID = -1;
+            string firstName = string.Empty;
+            string secondName = string.Empty;
+            string thirdName = string.Empty;
+            string lastName = string.Empty;
+            DateTime dateOfBirth = DateTime.Now;
+            byte gender = 1;
+            string address = string.Empty;
+            string phone = string.Empty;
+            string email = string.Empty;
+            int countryID = -1;
+            string imagePath = null;
+
+            clsPeopleDataAccess.FindWithNationalNo(ref personID, NationalNo, ref firstName, ref secondName, ref thirdName, ref lastName
+                , ref dateOfBirth, ref address, ref gender, ref phone, ref email, ref countryID, ref imagePath);
+
+            return new clsPeople(personID, NationalNo, firstName, secondName,thirdName, lastName, dateOfBirth, gender, address, phone, email, countryID, imagePath);
 
                 }
 

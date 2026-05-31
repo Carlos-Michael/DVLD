@@ -115,143 +115,7 @@ WHERE        (LocalDrivingLicenseApplications.LicenseClassID = @LicenseClassID) 
 
             return dt;
         }
-        static public DataTable GetLocalDrivingLicenseApplicationsWithID(int ID)
-        {
-            DataTable dt = new DataTable();
-
-            SqlConnection connection = new SqlConnection(clsDatabaseSettings.connectionstring);
-
-            string query = @"SELECT * From LocalDrivingLicenseApplications_View WHERE LocalDrivingLicenseApplicationID LIKE @ID ";
-
-            SqlCommand command = new SqlCommand(query, connection);
-
-            command.Parameters.AddWithValue("@ID", ID.ToString() + '%');
-
-            try
-            {
-                connection.Open();
-
-                SqlDataReader reader = command.ExecuteReader();
-
-                if (reader.HasRows)
-                {
-                    dt.Load(reader);
-                }
-
-                reader.Close();
-            }
-            catch { }
-            finally
-            {
-                connection.Close();
-            }
-
-            return dt;
-        }
-
-        static public DataTable GetLocalDrivingLicenseApplicationsWithNationalNo(string NationalNo)
-        {
-            DataTable dt = new DataTable();
-
-            SqlConnection connection = new SqlConnection(clsDatabaseSettings.connectionstring);
-
-            string query = @"SELECT * From LocalDrivingLicenseApplications_View WHERE NationalNo LIKE @NationalNo ";
-
-            SqlCommand command = new SqlCommand(query, connection);
-
-            command.Parameters.AddWithValue("@NationalNo", NationalNo + '%');
-
-            try
-            {
-                connection.Open();
-
-                SqlDataReader reader = command.ExecuteReader();
-
-                if (reader.HasRows)
-                {
-                    dt.Load(reader);
-                }
-
-                reader.Close();
-            }
-            catch { }
-            finally
-            {
-                connection.Close();
-            }
-
-            return dt;
-        }
-
-        static public DataTable GetLocalDrivingLicenseApplicationsWithFullName(string FullName)
-        {
-            DataTable dt = new DataTable();
-
-            SqlConnection connection = new SqlConnection(clsDatabaseSettings.connectionstring);
-
-            string query = @"SELECT * From LocalDrivingLicenseApplications_View WHERE FullName LIKE @FullName ";
-
-            SqlCommand command = new SqlCommand(query, connection);
-
-            command.Parameters.AddWithValue("@FullName", FullName + '%');
-
-            try
-            {
-                connection.Open();
-
-                SqlDataReader reader = command.ExecuteReader();
-
-                if (reader.HasRows)
-                {
-                    dt.Load(reader);
-                }
-
-                reader.Close();
-            }
-            catch { }
-            finally
-            {
-                connection.Close();
-            }
-
-            return dt;
-        }
-
-        static public DataTable GetLocalDrivingLicenseApplicationsWithStatus(string Status)
-        {
-            DataTable dt = new DataTable();
-
-            SqlConnection connection = new SqlConnection(clsDatabaseSettings.connectionstring);
-
-            string query = @"SELECT * From LocalDrivingLicenseApplications_View WHERE Status LIKE @Status ";
-
-            SqlCommand command = new SqlCommand(query, connection);
-
-            command.Parameters.AddWithValue("@Status", Status + '%');
-
-            try
-            {
-                connection.Open();
-
-                SqlDataReader reader = command.ExecuteReader();
-
-                if (reader.HasRows)
-                {
-                    dt.Load(reader);
-                }
-
-                reader.Close();
-            }
-            catch { }
-            finally
-            {
-                connection.Close();
-            }
-
-            return dt;
-        }
-
-
+        
         static public bool FindLocalDrivingLicenseApplicationsWithID(int ID, ref int ApplicationID, ref int LicenseClassID)
         {
             bool isFound = false;
@@ -278,7 +142,7 @@ WHERE        (LocalDrivingLicenseApplications.LicenseClassID = @LicenseClassID) 
 
                 reader.Close();
             }
-            catch 
+            catch
             {
                 isFound = false;
             }
@@ -289,9 +153,75 @@ WHERE        (LocalDrivingLicenseApplications.LicenseClassID = @LicenseClassID) 
 
             return isFound;
 
-        } 
+        }
+
+        public static int GetPassedTests(int LocalDrivingLicenseApplicationID)
+        {
+            int PassedTests;
+            SqlConnection connection = new SqlConnection(clsDatabaseSettings.connectionstring);
+
+            string query = @"SELECT        PassedTestCount
+FROM            LocalDrivingLicenseApplications_View
+WHERE        (LocalDrivingLicenseApplicationID = @ID)";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@ID", LocalDrivingLicenseApplicationID);
+
+            try
+            {
+                connection.Open();
+                object Resault = command.ExecuteScalar();
+
+                if (Resault != null && int.TryParse(Resault.ToString(), out int Count))
+                {
+                    PassedTests = Count;
+                }
+                else
+                {
+                    PassedTests = -1;
+                }
+            }
+            catch
+            {
+                PassedTests = -1;
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return PassedTests;
+        }
     
+
+        
+        static public bool Delete(int LocalDrivingLicenseApplicationID)
+        {
+            int RowsAffected = 0;
+
+            SqlConnection connection = new SqlConnection(clsDatabaseSettings.connectionstring);
+
+            string query = "Delete from LocalDrivingLicenseApplications Where LocalDrivingLicenseApplicationID = @ID";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@ID", LocalDrivingLicenseApplicationID);
+
+            try
+            {
+                connection.Open();
+
+                RowsAffected = command.ExecuteNonQuery();
+            }
+            catch { }
+            finally
+            {
+                connection.Close();
+            }
+
+            return (RowsAffected > 0);
+        }
+            
     }
-    
 }
 

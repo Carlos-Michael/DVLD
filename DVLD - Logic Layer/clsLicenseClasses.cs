@@ -31,7 +31,7 @@ namespace DVLD___Logic_Layer
             return clsLicenseClassesDataAccess.GetLicenseClass();
         }
 
-        static public clsLicenseClasses GetLicenseClassesWithClassName(string ClassName)
+        static public clsLicenseClasses GetLicenseClassByClassName(string ClassName)
         {
             int licenseClassID = -1;
             string classDescription = string.Empty;
@@ -43,6 +43,23 @@ namespace DVLD___Logic_Layer
                 return new clsLicenseClasses(licenseClassID, ClassName, classDescription, minimumAllowedAge, defaultValidityLength, classFees);
             }
             else 
+            {
+                return null;
+            }
+        }
+
+        static public clsLicenseClasses GetLicenseClassByID(int LicenseClassID)
+        {
+            string className = string.Empty;
+            string classDescription = string.Empty;
+            byte minimumAllowedAge = 0;
+            byte defaultValidityLength = 0;
+            decimal classFees = -1;
+            if (clsLicenseClassesDataAccess.GetLicenseClassByID(LicenseClassID, ref className,ref classDescription, ref minimumAllowedAge, ref defaultValidityLength, ref classFees))
+            {
+                return new clsLicenseClasses(LicenseClassID, className, classDescription, minimumAllowedAge, defaultValidityLength, classFees);
+            }
+            else
             {
                 return null;
             }

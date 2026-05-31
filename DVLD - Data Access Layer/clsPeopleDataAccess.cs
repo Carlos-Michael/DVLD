@@ -13,7 +13,12 @@ namespace DVLD___Data_Access_Layer
             SqlConnection connection = new SqlConnection(clsDatabaseSettings.connectionstring);
 
             string query = @"SELECT        People.PersonID, People.NationalNo, People.FirstName, People.SecondName, People.ThirdName, People.LastName
-, People.DateOfBirth, People.Gendor, People.Address, People.Phone, People.Email,
+, People.DateOfBirth, People.Gendor,
+CASE
+WHEN People.Gendor = 0 THEN 'Male'
+ELSE 'Female'
+END as GendorCaption
+People.Address, People.Phone, People.Email,
 Countries.CountryName AS Nationalty FROM            People INNER JOIN Countries ON People.NationalityCountryID = Countries.CountryID";
 
             SqlCommand command = new SqlCommand(query, connection);
@@ -38,94 +43,7 @@ Countries.CountryName AS Nationalty FROM            People INNER JOIN Countries 
             return datatable;
         }
 
-        public static DataTable GetPeopleWithFilter(string Filter, string Value)
-        {
-            DataTable dataTable = new DataTable();
-
-            SqlConnection connection = new SqlConnection(clsDatabaseSettings.connectionstring);
-
-            string query = "SELECT        People.PersonID, People.NationalNo, People.FirstName, People.SecondName, People.ThirdName, People.LastName" +
-                ", People.DateOfBirth, People.Gendor, People.Address, People.Phone, People.Email," +
-                "Countries.CountryName AS Nationalty FROM            People INNER JOIN Countries ON People.NationalityCountryID = Countries.CountryID" +
-                $" Where {Filter} LIKE @Value ";
-
-
-            SqlCommand command = new SqlCommand(query, connection);
-
-            command.Parameters.AddWithValue("@Value", Value + '%');
-
-            try
-            {
-                connection.Open();
-                SqlDataReader reader = command.ExecuteReader();
-                if (reader.HasRows)
-                {
-                    dataTable.Load(reader);
-                }
-                reader.Close();
-            }
-            catch { }
-            finally
-            {
-                connection.Close();
-            }
-
-            return dataTable;
-        }
-        public static DataTable GetPeopleWithNationalNo(string NatinoalNo)
-        {
-            return GetPeopleWithFilter("NationalNo", NatinoalNo);
-        }
-
-        public static DataTable GetPeopleWithPersonID(string PersonID)
-        {
-            return GetPeopleWithFilter("PersonID", PersonID);
-        }
-
-        public static DataTable GetPeopleWithFirstName(string FirstName)
-        {
-            return GetPeopleWithFilter("FirstName", FirstName);
-        }
-        public static DataTable GetPeopleWithSecondName(string secondName)
-        {
-            return GetPeopleWithFilter("SecondName", secondName);
-        }
-
-        public static DataTable GetPeopleWithThirdName(string thirdName)
-        {
-            return GetPeopleWithFilter("ThirdName", thirdName);
-        }
-
-        public static DataTable GetPeopleWithLastName(string lastName)
-        {
-            return GetPeopleWithFilter("LastName", lastName);
-        }
-
-        public static DataTable GetPeopleWithGender(string gender)
-        {
-            return GetPeopleWithFilter("Gendor", gender);
-        }
-
-        public static DataTable GetPeopleWithAddress(string address)
-        {
-            return GetPeopleWithFilter("Address", address);
-        }
-
-        public static DataTable GetPeopleWithPhone(string phone)
-        {
-            return GetPeopleWithFilter("Phone", phone);
-        }
-
-        public static DataTable GetPeopleWithEmail(string email)
-        {
-            return GetPeopleWithFilter("Email", email);
-        }
-
-        public static DataTable GetPeopleWithNationalty(string Nationalty)
-        {
-            return GetPeopleWithFilter("CountryName", Nationalty);
-        }
-
+       
         public static void FindWithPersonID(int PersonID, ref string NationalNo, ref string FirstName, ref string SecondName, ref string ThirdName
             , ref string LastName, ref DateTime DateOfBirth, ref string Address, ref byte Gender, ref string Phone, ref string Email, ref int CountryID
             , ref string ImagePath)
@@ -143,9 +61,49 @@ Countries.CountryName AS Nationalty FROM            People INNER JOIN Countries 
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
 
-                while (reader.Read())
+                if (reader.Read())
                 {
                     NationalNo = (string)reader["NationalNo"];
+                    FirstName = (string)reader["FirstName"];
+                    SecondName = (string)reader["SecondName"];
+                    ThirdName = (string)reader["ThirdName"];
+                    LastName = (string)reader["LastName"];
+                    DateOfBirth = (DateTime)reader["DateOfBirth"];
+                    Gender = (byte)reader["Gendor"];
+                    Address = (string)reader["Address"];
+                    Phone = (string)reader["Phone"];
+                    Email = (string)reader["Email"];
+                    CountryID = (int)reader["NationalityCountryID"];
+                    ImagePath = (reader["ImagePath"]).ToString();
+                }
+                reader.Close();
+            }
+            catch { }
+            finally
+            {
+                connection.Close();
+            }
+        }
+        public static void FindWithNationalNo(ref int PersonID, string NationalNo, ref string FirstName, ref string SecondName, ref string ThirdName
+            , ref string LastName, ref DateTime DateOfBirth, ref string Address, ref byte Gender, ref string Phone, ref string Email, ref int CountryID
+            , ref string ImagePath)
+        {
+            SqlConnection connection = new SqlConnection(clsDatabaseSettings.connectionstring);
+
+            string query = "SELECT * FROM People WHERE NationalNo = @NationalNo";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@NationalNo", NationalNo);
+
+            try
+            {
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    PersonID = (int)reader["PersonID"];
                     FirstName = (string)reader["FirstName"];
                     SecondName = (string)reader["SecondName"];
                     ThirdName = (string)reader["ThirdName"];

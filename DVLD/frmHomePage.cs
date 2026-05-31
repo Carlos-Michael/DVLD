@@ -79,5 +79,11 @@ namespace DVLD
             frmLocalDrivingLicense localDrivingLIcense = new frmLocalDrivingLicense(_User);
             localDrivingLIcense.ShowDialog(); 
         }
+
+        private void driversToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmManageDrivers Drivers = new frmManageDrivers();
+            Drivers.ShowDialog();
+        }
     }
 }
